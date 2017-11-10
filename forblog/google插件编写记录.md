@@ -1,14 +1,32 @@
 # google插件编写
-[toc]
 
-## 编写说明
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->
+<!-- code_chunk_output -->
+
+* [google插件编写](#google插件编写)
+	* [1 编写说明](#1-编写说明)
+	* [2 开始编写](#2-开始编写)
+		* [2.1 manifest.json内容](#21-manifestjson内容)
+			* [2.1.1 content_scripts](#211-content_scripts)
+			* [2.1.2 background](#212-background)
+			* [2.1.3 event-pages](#213-event-pages)
+			* [2.1.4 popup](#214-popup)
+			* [2.1.5 homepage_url](#215-homepage_url)
+			* [2.1.6 页面访问js inject](#216-页面访问js-inject)
+			* [2.2.1 manifest中添加的五种js区别](#221-manifest中添加的五种js区别)
+
+<!-- /code_chunk_output -->
+
+
+
+## 1 编写说明
 Chrome插件是一个用Web技术开发、用来增强浏览器功能的软件，它其实就是一个由HTML、CSS、JS、图片等资源组成的一个.crx后缀的压缩包.也可通过c++等编写的动态链接库实现更底层的功能。<br>
 google 插件编写是在闲暇时间学习，该文件记录学习过程遇到的问题。<br>
 从chrome右上角菜单->更多工具->扩展程序可以进入 插件管理页面，也可以直接在地址栏输入 chrome://extensions 访问。<br>
 勾选<strong> 开发者模式 </strong>可以通过文件夹加载插件，否则只能加载.crx
-## 开始编写
+## 2 开始编写
 插件核心是manifest.json文件，用来配置所有插件相关的配置，必须放在跟目录。
-### manifest.json
+### 2.1 manifest.json内容
 manifest.json基础配置如下
 ```
 {
@@ -109,3 +127,64 @@ manifest.json基础配置如下
 }
 
 ```
+#### 2.1.1 content_scripts
+向页面注入脚本一种形式，可以通过配置向页面注入js与css
+content_scripts和原始页面共享dom，但不共享js，要访问js变量，只能通过injected js实现。
+
+content_scripts只能访问下面chrome api
+> chrome.extension(getURL , inIncognitoContext , lastError , onRequest , sendRequest)
+> chrome.i18n
+> chrome.runtime(connect , getManifest , getURL , id , onConnect , onMessage , sendMessage)
+> chrome.storage
+
+#### 2.1.2 background
+background是一个常驻页面，是插件中生命周期最长，随着浏览器打开关闭而打开关闭，需要一直运行的代码放在background。
+background可以调用所有chrome扩展API，可以跨域访问所有外部任何网站。
+
+#### 2.1.3 event-pages
+event-pages为解决background一直后台运行的资源消耗问题，它比background多一项persistent配置。它只在需要时加载，空闲时自动关闭。
+```
+{
+    "background":
+    {
+        "scripts": ["event-page.js"],
+        "persistent": false
+    }
+}
+```
+
+#### 2.1.4 popup
+popup是点击图标打开的html页面，会自适应大小，配置如下：
+```
+{
+    "browser_action":
+    {
+        "default_icon": "img/icon.png",
+        // 图标悬停时的标题，可选
+        "default_title": "这是一个示例Chrome插件",
+        "default_popup": "popup.html"
+    }
+}
+```
+
+#### 2.1.5 homepage_url
+开发者或插件主页
+
+#### 2.1.6 页面访问js inject
+content_scripts添加的js在dom中不能访问，需在页面添加相应配置
+```
+{
+    // 普通页面能够直接访问的插件资源列表，如果不设置是无法直接访问的
+    "web_accessible_resources": ["js/inject.js"],
+}
+```
+
+#### 2.2.1 manifest中添加的五种js区别
+权限
+| js种类 | 可访问的API | dom访问情况 | 页面js访问情况 | 能否直接跨域 |
+| :----- |  :----- | :----- | :----- | :----- |
+| injected script |	和普通JS无任何差别，不能访问任何扩展API | 可以访问 | 可以访问 | 不可以|
+| content script | 只能访问 extension、runtime等部分API |	可以访问 | 不可以 | 不可以 |
+| popup js | 可访问绝大部分API，除了devtools系列 | 不可直接访问 | 不可以 |	可以 |
+| background js |	可访问绝大部分API，除了devtools系列	| 不可直接访问 | 不可以 | 可以 |
+| devtools js |	只能访问 devtools、extension、runtime等部分API | 可以 | 可以 | 不可以 |
