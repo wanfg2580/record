@@ -196,13 +196,13 @@ content_scripts添加的js在dom中不能访问，需在页面添加相应配置
 ### 3.1 总结
 已安装插件源码位置
 >ubuntu已安装的插件位置 **/home/usename/.config/google-chrome/Default/Extensions**, 文件夹名为插件id
->插件id在 <a href="chrome://extensions">chrome://extensions</a> 页面勾选开发者模式可见，如下图片所示
+>插件id在 [chrome://extensions][chrome://extensions] 页面勾选开发者模式可见，如下图片所示
 
 ![插件id](../images/extensionid.png)
 
 
 ### 3.2 打包
-在 <a href="chrome://extensions">chrome://extensions</a> 页面选择Pack extensions打包即可打包成.crx文件
+在 [chrome://extensions][chrome://extensions] 页面选择Pack extensions打包即可打包成.crx文件
 
 ![打包页](../images/pack.png)
 
