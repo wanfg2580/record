@@ -14,6 +14,9 @@
 			* [2.1.5 homepage_url](#215-homepage_url)
 			* [2.1.6 页面访问js inject](#216-页面访问js-inject)
 			* [2.2.1 manifest中添加的五种js区别](#221-manifest中添加的五种js区别)
+	* [3 注意事项](#3-注意事项)
+		* [3.1 总结](#31-总结)
+		* [3.2 打包](#32-打包)
 
 <!-- /code_chunk_output -->
 
@@ -188,3 +191,20 @@ content_scripts添加的js在dom中不能访问，需在页面添加相应配置
 | popup js | 可访问绝大部分API，除了devtools系列 | 不可直接访问 | 不可以 |	可以 |
 | background js |	可访问绝大部分API，除了devtools系列	| 不可直接访问 | 不可以 | 可以 |
 | devtools js |	只能访问 devtools、extension、runtime等部分API | 可以 | 可以 | 不可以 |
+
+## 3 注意事项
+### 3.1 总结
+已安装插件源码位置
+>ubuntu已安装的插件位置 **/home/usename/.config/google-chrome/Default/Extensions**, 文件夹名为插件id
+>插件id在 <a href="chrome://extensions">chrome://extensions</a> 页面勾选开发者模式可见，如下图片所示
+
+![插件id](../images/extensionid.png)
+
+
+### 3.2 打包
+在 <a href="chrome://extensions">chrome://extensions</a> 页面选择Pack extensions打包即可打包成.crx文件
+
+![打包页](../images/pack.png)
+
+
+TODO **2017-11-13 学习插件基本内容，深层开发学习以后深入**
