@@ -24,13 +24,13 @@ conda update conda
 ## 2、管理环境
 + 创建新环境
 ```
-conda create -n **环境名** python=3
+conda create -n env_name python=3
 ```
 
 + 环境切换
 ```
 #切换到新环境
-source activate **环境名**
+source activate env_name
 #退出环境
 deactivate env_name
 ```
