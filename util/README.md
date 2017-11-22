@@ -5,3 +5,5 @@ checkstyle配置文件
 google java 编码规范配置文件
 ### docker.sh
 自动安装docker
+### SwithyOmega_Chromium.crx
+谷歌浏览器上网插件
