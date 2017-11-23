@@ -181,3 +181,23 @@ redis-cli
 4. iOS
 > Mozilla/5.0 (iPad; CPU OS 5_0 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 > > Mobile/9A334 Safari/7534.48.3
 > Mozilla/5.0 (iPod; U; CPU like Mac OS X; en) AppleWebKit/420.1 (KHTML, like Gecko) Version/3.0 Mobile/3A101a Safari/419.3
+
+## git忽视而不提交文件
+1. 从未提交的文件使用 .gitignore
+适用从没有commit的文件,即没有被git记录
+2. 已经推送（push）过的文件，想从git远程库中删除，并在以后的提交中忽略，但是却还想在本地保留这个文件
+
+```
+git rm --cached Xml/config.xml
+#后面的 Xml/config.xml 是要从远程库中删除的文件的路径，支持通配符*
+```
+
+3. 已经推送（push）过的文件，想在以后的提交时忽略此文件，即使本地已经修改过，而且不删除git远程库中相应文件
+```
+git update-index --assume-unchanged Xml/config.xml  
+# 后面的 Xml/config.xml 是要忽略的文件的路径。
+```
+如果要忽略一个目录，打开 git bash，cd到 目标目录下，执行：
+```
+git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
+```
