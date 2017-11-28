@@ -201,3 +201,13 @@ git update-index --assume-unchanged Xml/config.xml
 ```
 git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
 ```
+
+## Axel--ubuntu 多线程下载工具
+-n   指定线程数
+-o   指定另存为目录
+-s   指定每秒的最大比特数
+-q   静默模式
+
+如从Diahosting下载lnmp安装包指定10个线程，存到/tmp/：axel -n 10 -o /tmp/ http://soft.vpser.net/lnmp/lnmp0.7-full.tar.gz
+
+如果下载过程中下载中断可以再执行下载命令即可恢复上次的下载进度。
