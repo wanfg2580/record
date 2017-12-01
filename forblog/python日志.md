@@ -1,3 +1,15 @@
+<!--
+author: jimmy
+head:
+date: 2017-11-21
+title: python日志
+tags: python 日志
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: python
+status: publish
+summary: python日志
+-->
+
 # python日志
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->
@@ -91,7 +103,7 @@ logger.info("")
 
 > 格式化的时间样式
 
-+ 
++
 ### 3.2. SetLevel日志级别
 ### 3.3. Handler日志处理器
 ### 3.4. 配置方法

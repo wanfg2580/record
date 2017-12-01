@@ -1,3 +1,15 @@
+<!--
+author: jimmy
+head:
+date: 2017-10-20
+title: google插件编写
+tags: google 插件
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: forfun
+status: publish
+summary: google插件编写
+-->
+
 # google插件编写
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->

@@ -1,3 +1,14 @@
+<!--
+author: jimmy
+head:
+date: 2016-10-4
+title: anaconda管理python环境
+tags: python
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: python
+status: publish
+summary: anaconda管理python环境
+-->
 # anaconda管理python环境
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->

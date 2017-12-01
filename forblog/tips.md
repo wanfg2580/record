@@ -1,3 +1,15 @@
+<!--
+author: jimmy
+head:
+date: 2017-12-01
+title: 小tips
+tags: google 插件
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: tips
+status: publish
+summary: 日常学习小tips
+-->
+
 # 小tips
 
 [toc]

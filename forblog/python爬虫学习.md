@@ -1,3 +1,15 @@
+<!--
+author: jimmy
+head:
+date: 2017-12-01
+title: python日志
+tags: python 日志
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: python
+status: publish
+summary: python日志
+-->
+
 # python 爬虫学习
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->

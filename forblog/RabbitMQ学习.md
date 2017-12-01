@@ -1,3 +1,15 @@
+<!--
+author: jimmy
+head:
+date: 2017-12-01
+title: RabbitMQ学习
+tags: RabbotMQ 队列
+images: http://pingodata.qiniudn.com/cube2.jpg
+category: 队列
+status: publish
+summary: RabbitMQ学习
+-->
+
 # RabbitMQ学习
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->
