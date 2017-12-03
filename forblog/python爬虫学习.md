@@ -2,12 +2,12 @@
 author: jimmy
 head:
 date: 2017-12-01
-title: python日志
-tags: python 日志
+title: python 爬虫学习
+tags: python
 images: http://pingodata.qiniudn.com/cube2.jpg
 category: python
 status: publish
-summary: python日志
+summary: python 爬虫学习
 -->
 
 # python 爬虫学习
