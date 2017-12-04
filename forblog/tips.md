@@ -56,10 +56,10 @@ set completion-ignore-case on
 
 > show-all-if-ambiguous : 默认情况下，按下两次
 
-> <tab> 才会出现提示，现在只需要一次了。
+> tab才会出现提示，现在只需要一次了。
 > match-hidden-files : 不显示隐藏文件，特别是当你在 Home 目录时，你会觉得眼前好干净。
 > completion-ignore-case : 在自动补全时忽略大小写
-> history-search-* : 输入某个命令的一部分时，按上下箭头，会匹配关于这个这命令最近的使用历史。</tab>
+> history-search-* : 输入某个命令的一部分时，按上下箭头，会匹配关于这个这命令最近的使用历史。
 
 重启终端即可
 
