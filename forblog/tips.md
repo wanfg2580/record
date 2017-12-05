@@ -4,7 +4,7 @@ head:
 date: 2017-12-05
 title: 日常记录
 tags: tips
-images: http://pingodata.qiniudn.com/cube2.jpg
+images: blog/img/1.jpg
 category: tips
 status: publish
 summary: 日常学习小tips
