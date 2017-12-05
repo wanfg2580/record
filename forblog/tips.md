@@ -1,18 +1,43 @@
 <!--
 author: jimmy
 head:
-date: 2017-12-01
-title: 小tips
-tags: google 插件
+date: 2017-12-05
+title: 日常记录
+tags: tips
 images: http://pingodata.qiniudn.com/cube2.jpg
 category: tips
 status: publish
 summary: 日常学习小tips
 -->
 
-# 小tips
+# 日常记录
 
-[toc]
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=0} -->
+<!-- code_chunk_output -->
+
+* [日常记录](#日常记录)
+	* [笔记本Ubuntu网卡解决方式](#笔记本ubuntu网卡解决方式)
+	* [maven依赖本地jar包](#maven依赖本地jar包)
+	* [ubuntu搜狗输入法输不了中文](#ubuntu搜狗输入法输不了中文)
+	* [转化私钥格式](#转化私钥格式)
+	* [ubuntu bash自动补全忽视大小写](#ubuntu-bash自动补全忽视大小写)
+	* [ubuntu 安装gradle](#ubuntu-安装gradle)
+	* [pip install 时报错 locale.Error: unsupported locale setting](#pip-install-时报错-localeerror-unsupported-locale-setting)
+	* [ubuntu shadowsocks安装](#ubuntu-shadowsocks安装)
+	* [redis 安装](#redis-安装)
+	* [常见User Agent](#常见user-agent)
+	* [git忽视而不提交文件](#git忽视而不提交文件)
+	* [Axel--ubuntu 多线程下载工具](#axel-ubuntu-多线程下载工具)
+	* [解压文件](#解压文件)
+	* [创建openssl pfx证书文件](#创建openssl-pfx证书文件)
+	* [linux定时任务crontab](#linux定时任务crontab)
+		* [1. crontab服务](#1-crontab服务)
+		* [2.cron命令](#2cron命令)
+		* [3.  cron文件语法:](#3-cron文件语法)
+
+<!-- /code_chunk_output -->
+
 
 ## 笔记本Ubuntu网卡解决方式
 
@@ -282,3 +307,59 @@ git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
     ———————————————
     .deb
     解包：ar p FileName.deb data.tar.gz | tar zxf -
+
+
+****
+
+## 创建openssl pfx证书文件
+1、生成key
+输入genrsa -out openssl.key 1024生成openssl.key文件。
+
+openssl.key为key的名字随意起，1024为密钥长度
+2、生成cer证书
+
+接着输入req -new -x509 -key openssl.key -out openssl.cer -days
+ 3650 -subj /CN=??
+
+openssl.key为之前生成的key的名字，openssl.cer为生成的证书名字，3650为证书过期天数，CN的参数??是的你主机名或者IP地址(这里一定要写对，不然以后访问的话，浏览器会提示有风险)。
+这样就生成了证书文件openssl.cer
+
+3、生成需要的PFX私钥文件
+
+输入pkcs12 -export -out openssl.pfx -inkey openssl.key -in openssl.cer
+
+会让你输入密码，使用私钥时候使用的（千万不能忘记）。
+这样就生成了私钥文件openssl.pfx。
+
+4、生成了crt证书
+
+由于手机需要crt证书，所以需要的话还要生成crt
+输入req -new -x509 -key openssl.key -out openssl.crt -days 3650
+
+***
+## linux定时任务crontab
+crontab命令的功能是在一定的时间间隔调度一些命令的执行。
+ubuntu下常用命令
+### 1. crontab服务
+sudo service cron start
+sudo service cron stop
+sudo service cron restart
+sudo service cron reload #重新载入配置
+sudo service cron status #启动状态
+
+### 2.cron命令
+crontab -u //设定某个用户的cron服务，一般root用户在执行这个命令的时候需要此参数  
+crontab -l //列出某个用户cron服务的详细内容
+crontab -r //删除某个用户的cron服务
+crontab -e //编辑某个用户的cron服务
+### 3.  cron文件语法:
+| 分 | 小时 | 日 | 月 | 星期 | 命令 |
+| :------------- | :------------- | :------------- | :------------- | :------------- | :------------- |
+| 0-59 | 0-23 | 1-31 | 1-21 | 0-6 | command |
+> 一般一行代表一个任务
+
+>记住几个特殊符号的含义:
+“*”代表取值范围内的数字,
+“/”代表”每”,
+“-”代表从某个数字到某个数字,
+“,”分开几个离散的数字
