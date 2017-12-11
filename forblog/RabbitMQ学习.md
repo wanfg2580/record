@@ -55,3 +55,26 @@ sudo apt-get install rabbitmq-server
 执行rabbitmq-plugins enable rabbitmq_management,开启web管理插件，访问[http://localhost:15672](http://localhost:15672) 使用guest/guest登录查看rabbit管理
 
 ## Spring Boot中使用RabbitMQ
+1. 添加依赖
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-amqp</artifactId
+</dependency>
+```
+2. 接受与发送代码
+```
+@Autowired
+private AmqpTemplate rabbitTemplate;
+
+public void send() {
+	String context = "hello " + new Date();
+	System.out.println("Sender : " + context);
+	this.rabbitTemplate.convertAndSend("hello", context);
+}
+
+@RabbitHandler
+public void process(String hello) {
+  System.out.println("Receiver : " + hello);
+}
+```
