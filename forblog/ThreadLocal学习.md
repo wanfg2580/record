@@ -37,10 +37,6 @@ public void set(T value) {
 }
 ```
 
-#### 2.2 get函数
-
-
-
 ```
 static class Entry extends WeakReference<ThreadLocal<?>> {
   /** The value associated with this ThreadLocal. */
@@ -51,3 +47,5 @@ static class Entry extends WeakReference<ThreadLocal<?>> {
   }
 }
 ```
+
+#### 2.2 get函数
