@@ -313,11 +313,11 @@ git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
 ****
 
 ## 创建openssl pfx证书文件
-1、生成key
+1. 生成key
 输入genrsa -out openssl.key 1024生成openssl.key文件。
 
 openssl.key为key的名字随意起，1024为密钥长度
-2、生成cer证书
+2. 生成cer证书
 
 接着输入req -new -x509 -key openssl.key -out openssl.cer -days
  3650 -subj /CN=??
@@ -325,17 +325,53 @@ openssl.key为key的名字随意起，1024为密钥长度
 openssl.key为之前生成的key的名字，openssl.cer为生成的证书名字，3650为证书过期天数，CN的参数??是的你主机名或者IP地址(这里一定要写对，不然以后访问的话，浏览器会提示有风险)。
 这样就生成了证书文件openssl.cer
 
-3、生成需要的PFX私钥文件
+3. 生成需要的PFX私钥文件
 
 输入pkcs12 -export -out openssl.pfx -inkey openssl.key -in openssl.cer
 
 会让你输入密码，使用私钥时候使用的（千万不能忘记）。
 这样就生成了私钥文件openssl.pfx。
 
-4、生成了crt证书
+4. 生成了crt证书
 
 由于手机需要crt证书，所以需要的话还要生成crt
 输入req -new -x509 -key openssl.key -out openssl.crt -days 3650
+
+5. 从文件中导出公私钥
+导出公钥：
+DSA方式：openssl dsa -in ddmdd_b.key -pubout -out ddmdd_b.pub.pem
+RSA方式：openssl rsa -in ddmdd_a.key -pubout -out ddmdd_a.pub.pem
+
+导出私钥：
+openssl rsa -in server.key -text > private.pem
+
+
+6. 从pfx中提取公私钥
+方法1：
+原版PFX证书
+openssl pkcs12 -in myssl.pfx -nodes -out server.pem
+ 提取私钥
+openssl rsa -in server.pem -out server.key
+提出公钥
+openssl x509 -in server.pem -out server.crt
+
+方法2：
+2.从pfx提取密钥信息，并转换为key格式（pfx使用pkcs12模式补足）
+提取密钥对
+openssl pkcs12 -in 1.pfx -nocerts -nodes -out 1.key
+//如果pfx证书已加密，会提示输入密码。如果cer证书没有安装，则密码没法验证
+
+从密钥对提取私钥
+openssl rsa -in  1.key -out 1_pri.key
+
+从密钥对提取公钥
+openssl rsa -in 1.key -pubout -out 1_pub.key
+
+因为RSA算法使用的是pkcs8模式补足，需要对提取的私钥进一步处理
+openssl pkcs8 -topk8 -inform PEM -in 1_pri.key -outform PEM -nocrypt
+复制窗口中生成的密钥，保存为1_pri_pkcs8.key
+
+得到密钥对1_pri_pkcs8.key和1_pub.key
 
 ***
 ## linux定时任务crontab
