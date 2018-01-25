@@ -36,6 +36,7 @@ summary: 日常学习小tips
 		* [2.cron命令](#2cron命令)
 		* [3.  cron文件语法:](#3-cron文件语法)
 		* [mysql_config not found](#mysql_config-not-found)
+	* [ubuntu解压windows乱码](#ubuntu解压windows乱码)
 
 <!-- /code_chunk_output -->
 
@@ -407,3 +408,8 @@ crontab -e //编辑某个用户的cron服务
 ```
 sudo apt-get install libmysqlclient-dev
 ```
+
+## ubuntu解压windows乱码
+/etc/environment中加入2行
+UNZIP="-O CP936"
+ZIPINFO="-O CP936"
