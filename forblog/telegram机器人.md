@@ -16,12 +16,15 @@ summary: anaconda管理python环境
 
 * [telegram Bot学习](#telegram-bot学习)
 		* [1. 创建bot机器人](#1-创建bot机器人)
+		* [1.1](#11)
 		* [2. telegram 设置webhook](#2-telegram-设置webhook)
-		* [3. 消息类型](#3-消息类型)
 
 <!-- /code_chunk_output -->
 
 ### 1. 创建bot机器人
+https://telegram.me/botfather
+和botfather聊天根据指令创建机器人
+### 1.1
 ### 2. telegram 设置webhook
 sudo pip install python-telegram-bot
 
@@ -46,14 +49,5 @@ bot.set_webhook(url, certificate=certificate, allowed_updates=allowed_updates)
 
 info2 = bot.get_webhook_info()
 print info2
-
-```
-### 3. 消息类型
-```
-#邀请好友
-
-```
-
-```
 
 ```
