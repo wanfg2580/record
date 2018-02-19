@@ -37,6 +37,7 @@ summary: 日常学习小tips
 		* [3.  cron文件语法:](#3-cron文件语法)
 		* [mysql_config not found](#mysql_config-not-found)
 	* [ubuntu解压windows乱码](#ubuntu解压windows乱码)
+	* [django 启动线程](#django-启动线程)
 
 <!-- /code_chunk_output -->
 
@@ -413,3 +414,7 @@ sudo apt-get install libmysqlclient-dev
 /etc/environment中加入2行
 UNZIP="-O CP936"
 ZIPINFO="-O CP936"
+
+## django 启动线程
+1. 需求：Django项目，需启动一个后台运行的线程监听消息
+2.  
