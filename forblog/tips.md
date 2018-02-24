@@ -35,7 +35,7 @@ summary: 日常学习小tips
 		* [1. crontab服务](#1-crontab服务)
 		* [2.cron命令](#2cron命令)
 		* [3.  cron文件语法:](#3-cron文件语法)
-		* [mysql_config not found](#mysql_config-not-found)
+	* [mysql_config not found](#mysql_config-not-found)
 	* [ubuntu解压windows乱码](#ubuntu解压windows乱码)
 	* [django 启动线程](#django-启动线程)
 
@@ -404,7 +404,8 @@ crontab -e //编辑某个用户的cron服务
 “,”分开几个离散的数字
 
 ***
-### mysql_config not found
+
+## mysql_config not found
 主要原因是没有安装:libmysqlclient-dev
 ```
 sudo apt-get install libmysqlclient-dev
