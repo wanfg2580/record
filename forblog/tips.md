@@ -38,6 +38,7 @@ summary: 日常学习小tips
 	* [mysql_config not found](#mysql_config-not-found)
 	* [ubuntu解压windows乱码](#ubuntu解压windows乱码)
 	* [django 启动线程](#django-启动线程)
+	* [ssh 免密登录](#ssh-免密登录)
 
 <!-- /code_chunk_output -->
 
@@ -417,5 +418,19 @@ UNZIP="-O CP936"
 ZIPINFO="-O CP936"
 
 ## django 启动线程
-1. 需求：Django项目，需启动一个后台运行的线程监听消息
-2.  
+需求：Django项目，需启动一个后台运行的线程监听消息
+1. 在model层的__init__.py中添加启动线程代码
+2. 启动项目添加 --noreload
+```
+python manage.py --noreload
+```
+
+## ssh 免密登录
+A机上生成公钥,输入下面命令后回车
+```
+ssh-keygen -t rsa -P ''
+```
+将A机上公钥发送到B机上，之后就可以免密登录
+```
+scp .ssh/id_rsa.pub devops@riot:~/.ssh/authorized_keys
+```
