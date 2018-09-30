@@ -17,29 +17,29 @@ summary: 日常学习小tips
 <!-- code_chunk_output -->
 
 * [日常记录](#日常记录)
- * [笔记本Ubuntu网卡解决方式](#笔记本ubuntu网卡解决方式)
- * [maven依赖本地jar包](#maven依赖本地jar包)
- * [ubuntu搜狗输入法输不了中文](#ubuntu搜狗输入法输不了中文)
- * [转化私钥格式](#转化私钥格式)
- * [ubuntu bash自动补全忽视大小写](#ubuntu-bash自动补全忽视大小写)
- * [ubuntu 安装gradle](#ubuntu-安装gradle)
- * [pip install 时报错 locale.Error: unsupported locale setting](#pip-install-时报错-localeerror-unsupported-locale-setting)
- * [ubuntu shadowsocks安装](#ubuntu-shadowsocks安装)
- * [redis 安装](#redis-安装)
- * [常见User Agent](#常见user-agent)
- * [git忽视而不提交文件](#git忽视而不提交文件)
- * [Axel--ubuntu 多线程下载工具](#axel-ubuntu-多线程下载工具)
- * [解压文件](#解压文件)
- * [创建openssl pfx证书文件](#创建openssl-pfx证书文件)
- * [linux定时任务crontab](#linux定时任务crontab)
-  * [1. crontab服务](#1-crontab服务)
-  * [2.cron命令](#2cron命令)
-  * [3.  cron文件语法:](#3-cron文件语法)
- * [mysql_config not found](#mysql_config-not-found)
- * [ubuntu解压windows乱码](#ubuntu解压windows乱码)
- * [django 启动线程](#django-启动线程)
- * [ssh 免密登录](#ssh-免密登录)
- * [hadoop web 端口](#hadoop web 端口)
+	* [笔记本Ubuntu网卡解决方式](#笔记本ubuntu网卡解决方式)
+	* [maven依赖本地jar包](#maven依赖本地jar包)
+	* [ubuntu搜狗输入法输不了中文](#ubuntu搜狗输入法输不了中文)
+	* [转化私钥格式](#转化私钥格式)
+	* [ubuntu bash自动补全忽视大小写](#ubuntu-bash自动补全忽视大小写)
+	* [ubuntu 安装gradle](#ubuntu-安装gradle)
+	* [pip install 时报错 locale.Error: unsupported locale setting](#pip-install-时报错-localeerror-unsupported-locale-setting)
+	* [ubuntu shadowsocks安装](#ubuntu-shadowsocks安装)
+	* [redis 安装](#redis-安装)
+	* [常见User Agent](#常见user-agent)
+	* [git忽视而不提交文件](#git忽视而不提交文件)
+	* [Axel--ubuntu 多线程下载工具](#axel-ubuntu-多线程下载工具)
+	* [解压文件](#解压文件)
+	* [创建openssl pfx证书文件](#创建openssl-pfx证书文件)
+	* [linux定时任务crontab](#linux定时任务crontab)
+		* [1. crontab服务](#1-crontab服务)
+		* [2.cron命令](#2cron命令)
+		* [3.  cron文件语法:](#3-cron文件语法)
+	* [mysql_config not found](#mysql_config-not-found)
+	* [ubuntu解压windows乱码](#ubuntu解压windows乱码)
+	* [django 启动线程](#django-启动线程)
+	* [ssh 免密登录](#ssh-免密登录)
+	* [hadoop web 端口](#hadoop-web-端口)
 
 <!-- /code_chunk_output -->
 
@@ -297,7 +297,7 @@ git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')
     ———————————————
     .zip
     解压：unzip FileName.zip
-    压缩：zip FileName.zip DirName
+    压缩：zip -r FileName.zip DirName
     ———————————————
     .rar
     解压：rar x FileName.rar
