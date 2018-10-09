@@ -27,6 +27,11 @@ summary: Linux
 			* [1.3.6 改变安全性设置](#136-改变安全性设置)
 	* [2.shell](#2shell)
 		* [2.1 shell基础](#21-shell基础)
+			* [2.1.1 重定向输入和输出](#211-重定向输入和输出)
+			* [2.1.2 管道](#212-管道)
+			* [2.1.3 退出脚本](#213-退出脚本)
+		* [2.2 if](#22-if)
+			* [2.2.1 数值比较](#221-数值比较)
 
 <!-- /code_chunk_output -->
 
@@ -204,3 +209,192 @@ type cd #--->cd is a shell builtin
 
 在涉及环境变量名时,什么时候该使用 $ ,什么时候不该使用 $ ,实在让人摸不着头脑。
 记住一点就行了:如果要用到变量,使用 $ ;如果要操作变量,不使用 $ 。
+
+##### 2.1.1 重定向输入和输出
++ 输出重定向
+( \> ) 将命令的输出发送到一个文件中，如果文件已存在，使用新的文件数据覆盖已有文件。
+( \>\> ) 将命令输出追加到已有文件中。
+( \< ) 将文件内容重定向到命令
+( \<\< ) 内联输入重定向，直接将后面内容重定向到命令
+
+##### 2.1.2 管道
+将一条命令的输出重定向为另一条命令的输入，这个过程称为管道连接。
+( | ) 将前一条命令的输出重定向到另一条命令中
+Linux系统实际上会同时运行这两条命令，在系统内部将它们连接起来，在第一条命令产生输出同时，输出会立刻送给第二条命令，数据传输不会用到中间文件或缓冲区。
+
+##### 2.1.3 退出脚本
+( exit ) 使用该命令返回退出状态码
+
+#### 2.2 结果化命令
+#### 2.2.1 if　命令
+```
+if command
+then
+    commands
+else
+    commands
+fi
+```
+if 语句会运行后面那个命令，如果该命令的退出状态码是0（执行成功），then部分命令才会执行，否则执行else部分命令；fi表示 if-then 语句到此结束。
+
+##### 2.2.1.1 数值比较
+使用test命令判断条件是否成立，如果成立test返回0；也可以使用方括号,第一个方括号之后和第二个方括号之前必须加上一个空格
+```
+if test command
+then
+    commands
+fi
+或者
+if [ command ]
+then
+    commands
+fi
+```
+
+数值比较命令如下
+
+| 比较 | 描述 |
+| :------------- | :------------- |
+| n1 -eq n2 | 检查 n1 是否与 n2 相等 |
+| n1 -ge n2 | 检查 n1 是否大于或等于 n2 |
+| n1 -gt n2 | 检查 n1 是否大于 n2 |
+| n1 -le n2 | 检查 n1 是否小于或等于 n2 |
+| n1 -lt n2 | 检查 n1 是否小于 n2 |
+| n1 -ne n2 | 检查 n1 是否不等于 n2 |
+
+字符串比较（大于号、小于号需要使用 \\ 转义
+> 在该比较中大写字母比小写字母小，而在sort中正好相反
+
+| 比较 | 描述 |
+| :------------- | :------------- |
+| str1 = str2 | 检查 str1 是否和 str2 相同 |
+| str1 != str2 | 检查 str1 是否和 str2 不同 |
+| str1 < str2 | 检查 str1 是否比 str2 小 |
+| -n str1 | 检查 str1 的长度是否非0 |
+| -z str1 | 检查 str1 的长度是否为0 |
+
+文件比较
+
+| 比较 | 描述 |
+| :------------- | :------------- |
+| -d file | 检查 file 是否存在并是一个目录 |
+| -e file | 检查 file 是否存在 |
+| -f file | 检查 file 是否存在并是一个文件 |
+| -r file | 检查 file 是否存在并可读 |
+| -s file | 检查 file 是否存在并非空 |
+| -w file | 检查 file 是否存在并可写 |
+| -x file | 检查 file 是否存在并可执行 |
+| -O file | 检查 file 是否存在并属当前用户所有 |
+| -G file | 检查 file 是否存在并且默认组与当前用户相同 |
+| file1 -nt file2 | 检查 file1 是否比 file2 新 |
+| file1 -ot file2 | 检查 file1 是否比 file2 旧 |
+
+##### 2.2.1.2 if高级特性
++ 双括号
+```
+((expression))
+```
+expression 可以是任意数学赋值或比较表达式
++ 双方括号
+```
+[[expression]]
+```
+双括号为字符串比较高级特性，不仅可以使用标准字符串比较，还可以匹配字符串。
+
+####　2.2.2 case 命令
+case 命令采用列表格式来检查单个变量的多个值。
+```
+case variable in
+pattern1 | pattern2) commands1;;
+pattern3) commands2;;
+*) default commands;;
+esac
+
+#!/bin/bash
+# using the case command
+#
+case $USER in
+rich | barbara)
+echo "Welcome, $USER"
+echo "Please enjoy your visit";;
+testing)
+echo "Special testing account";;
+jessica)
+echo "Do not forget to log off when you're done";;
+*)
+echo "Sorry, you are not allowed here";;
+esac
+```
+
+#### 2.2.3 for 命令
+```
+for var in list
+do
+    commands
+done
+```
+for 默认字段分隔符为 **空格** **制表符** **换行符**，修改分隔符，需修改IFS值
+```
+IFS=$','
+```
+如果要指定多个 IFS 字符,只要将它们在赋值行串起来就行。
+
+#### 2.2.4 while 与 until 命令
+```
+while test command
+do
+    other commands
+done
+```
+while可以使用多个测试条件，但只有最后一个测试命令的退出状态码会被用来决定什么时候结束循环。
+
+```
+until test commands
+do
+    other commands
+done
+```
+
+可以在done 之后将循环结果重定向
+
+#### 2.2.5 控制循环
++ break 跳出循环
+break n 可以使用n指定跳出的循环层级
++ continue 中止某次循环
+
+#### 2.3 用户输入
+##### 2.3.1 命令行参数
+命令行参数命令如下：
+
+|  | 功能 |
+| :------------- | :------------- |
+| $0 | 获取脚本名 |
+| $1 | 获取命令行第一个参数（1-9），每个参数以空格分开 |
+| $#  | 获取命令行参数个数 |
+| $* | 获取命令所有参数，当成一个单词 |
+| $@ | 获取命令行所有参数，当成多个单词 |
+| shift | 移动命令行参数，跳过不需要参数 |
+| getopt | 格式化命令行参数 |
+
+##### 2.3.2 用户输入参数
+read命令接受输入放入变量，如果未指定变量，放入 REPLY 变量中
+1. 使用 echo -n 接收
+```
+echo -n "Enter your name:"
+read name
+```
+2. read -p 直接接受
+```
+read -p "Enter your name:" name
+```
+
+read -t 时间 : 指定超时时间
+read -n 长度 ： 指定长度
+read -s : 隐藏输入信息，如密码等
+文件读取：对文件使用 cat 命令,将结果通过管道直接传给含有 read 命令的 while 命令
+```
+cat test | while read line
+do
+    commands
+done
+```
